@@ -1,0 +1,13 @@
+# Ignore the virtual environment directory
+venv/
+
+# Ignore the .env file containing environment variables
+.env
+
+# Ignore IDE or project-specific configuration files
+.project_config
+
+# Ignore other common files and directories
+__pycache__/
+*.pyc
+.DS_Store
