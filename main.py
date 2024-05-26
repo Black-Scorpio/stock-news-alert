@@ -31,9 +31,9 @@ def fetch_stock_data(stock_name):
 
 # Function to calculate the percentage difference between two values
 def calculate_percentage_difference(value1, value2):
-    difference = abs(value1 - value2)
-    percentage_difference = (difference / value2) * 100
-    return percentage_difference
+    difference = value1 - value2
+    percentage_difference = (abs(difference) / value2) * 100
+    return percentage_difference, difference
 
 # Function to fetch news articles related to a company
 def fetch_news(company_name):
@@ -69,13 +69,14 @@ def main():
     day_before_yesterday_close = float(time_series_daily[dates[1]]['4. close'])
 
     # Calculate percentage difference in closing prices
-    percentage_difference = calculate_percentage_difference(yesterday_close, day_before_yesterday_close)
+    percentage_difference, difference = calculate_percentage_difference(yesterday_close, day_before_yesterday_close)
+    direction_symbol = "↑" if difference > 0 else "↓"
 
     # Print out the company name, closing prices, dates, and the percentage difference
     print(f"Company: {COMPANY_NAME} ({STOCK_NAME})")
     print(f"Yesterday's close on {dates[0]}: {yesterday_close}")
     print(f"Day before yesterday's close on {dates[1]}: {day_before_yesterday_close}")
-    print(f"Percentage difference: {percentage_difference:.2f}%")
+    print(f"Percentage difference: {percentage_difference:.2f}% {direction_symbol}")
 
     # If the percentage difference is greater than 5%, fetch and send news articles
     if percentage_difference > 5:
